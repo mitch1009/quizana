@@ -1,0 +1,19 @@
+import { Configuration, OpenAIApi } from "openai";
+export const PersonalityAnalysis = async (prompt) => {
+    const configuration = new Configuration({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+      const openai = new OpenAIApi(configuration);
+      const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: "\nbelow is a list of persoalities for a candidate collected from a quiz. create a report based on these personality traits\n[\n    \"You are a logical and analytical person who likes to approach problems in a systematic way. You are good at breaking down complex problems into smaller, more manageable parts.\",\n    \"You are a resilient person who is able to brush off criticism and move on quickly. You may have a thick skin and not take things too personally.\",\n    \"You are an independent person who may struggle with working in a team. You may prefer to work alone and have a hard time collaborating with others.\",\n    \"You are a person who has a strong sense of humor. You may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a strong sense of humor and may have a\",\n    \"You are a person who may struggle with perseverance when faced with challenges. You may have a tendency to look for shortcuts or easy solutions rather than putting in the hard work.\",\n    \"You are a person who may struggle with taking responsibility for failure. You may have a tendency to blame others or external factors rather than looking inward.\",\n     \"You are an avoidant person who may struggle with confrontation. You may have a tendency to avoid conflicts altogether or hope that they will resolve themselves without your intervention.\",\n    \"You are a person who may struggle with uncertainty and the unknown. You may have a tendency to become anxious or overwhelmed when faced with new challenges or situations.\",\n     \"You are an avoidant person who may struggle with stress. You may have a tendency to avoid difficult situations or procrastinate when faced with a challenging task.\"\n]\n\n\nThis report is based on the personality traits of a candidate collected from a quiz. The candidate is described as a logical and analytical person who likes to approach problems in a systematic way and is good at breaking down complex problems into smaller, more manageable parts. They are also resilient and have a thick skin, but may struggle with working in a team due to their independent nature. \n\nThe candidate has a strong sense of humor and can make light of difficult situations. However, they may struggle with perseverance when faced with challenges and may look for shortcuts or easy solutions rather than putting in the hard work. Additionally, they may struggle with taking responsibility for failure and have a tendency to blame others or external factors rather than looking inward. \n\nWhen it comes to confrontation, the candidate may be avoidant and have a tendency to avoid conflicts altogether or hope that they will resolve themselves without their intervention. They may also struggle with uncertainty and the unknown, becoming anxious or overwhelmed when faced with new challenges or situations. Finally, the candidate may struggle with stress and have a tendency to avoid difficult situations or procrastinate when faced with a challenging task.",
+        temperature: 0.46,
+        max_tokens: 3000,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 1.31,
+    
+      });
+
+      return response.data.choices[0].text;
+}
